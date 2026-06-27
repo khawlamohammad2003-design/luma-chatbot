@@ -20,6 +20,12 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+@app.get("/")
+def home():
+    return {
+        "status": "running",
+        "message": "Luma Chatbot API is running successfully"
+    }
 connected_clients = []
 
 @app.websocket("/ws/leads")
