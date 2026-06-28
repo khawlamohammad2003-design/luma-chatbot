@@ -12,7 +12,7 @@ function LeadProfile() {
   const [aiLoading, setAiLoading] = useState(false);
 
   const fetchLead = () => {
-    fetch("https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads")
+    fetch("https://luma-chatbot-green.vercel.app/leads")
       .then((res) => res.json())
       .then((data) => {
         const foundLead = data.leads.find(
@@ -30,7 +30,7 @@ function LeadProfile() {
   }, [id]);
 
   const updateStatus = async () => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/status`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/leads/${id}/status`, {
       method: "PUT",
     });
 
@@ -38,7 +38,7 @@ function LeadProfile() {
   };
 
   const saveNotes = async () => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/notes`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/leads/${id}/notes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function LeadProfile() {
   };
 
   const saveFollowUp = async () => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/follow-up`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/leads/${id}/follow-up`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function LeadProfile() {
 
     try {
       const response = await fetch(
-        `https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/ai-message`,
+        `https://luma-chatbot-green.vercel.app/leads/${id}/ai-message`,
         {
           method: "POST",
         }
@@ -100,7 +100,7 @@ function LeadProfile() {
   };
 
   const deleteLead = async () => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/leads/${id}`, {
       method: "DELETE",
     });
 

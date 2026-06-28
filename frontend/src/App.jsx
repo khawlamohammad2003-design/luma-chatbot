@@ -31,7 +31,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://luma-chatbot-n4naqqzoh-luma11.vercel.app/chat", {
+      const response = await fetch("https://luma-chatbot-green.vercel.app/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

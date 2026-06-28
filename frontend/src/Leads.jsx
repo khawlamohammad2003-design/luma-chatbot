@@ -21,7 +21,7 @@ function Leads() {
   const [selectedLead, setSelectedLead] = useState(null);
 
   const fetchLeads = () => {
-    fetch("https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads")
+    fetch("https://luma-chatbot-green.vercel.app/chat/leads")
       .then((res) => res.json())
       .then((data) => {
         setLeads(data.leads);
@@ -44,7 +44,7 @@ function Leads() {
   }, []);
 
   useEffect(() => {
-    const socket = new WebSocket("wss://luma-chatbot-n4naqqzoh-luma11.vercel.app/ws/leads");
+    const socket = new WebSocket("wss://luma-chatbot-green.vercel.app/ws/leads");
 
     socket.onmessage = () => {
       fetchLeads();
@@ -70,7 +70,7 @@ function Leads() {
   };
 
   const updateStatus = async (id) => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/status`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/chat/leads/${id}/status`, {
       method: "PUT",
     });
 
@@ -78,7 +78,7 @@ function Leads() {
   };
 
   const saveNotes = async (id) => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/notes`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/chat/leads/${id}/notes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function Leads() {
   };
 
   const saveFollowUp = async (id) => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}/follow-up`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/chat/leads/${id}/follow-up`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ function Leads() {
   };
 
   const deleteLead = async (id) => {
-    await fetch(`https://luma-chatbot-n4naqqzoh-luma11.vercel.app/leads/${id}`, {
+    await fetch(`https://luma-chatbot-green.vercel.app/chat/leads/${id}`, {
       method: "DELETE",
     });
 
@@ -124,7 +124,7 @@ function Leads() {
   };
 
   const exportExcel = () => {
-    window.open("https://luma-chatbot-n4naqqzoh-luma11.vercel.app/export-leads", "_blank");
+    window.open("https://luma-chatbot-green.vercel.app/chat/export-leads", "_blank");
   };
 
   const today = new Date().toISOString().split("T")[0];
