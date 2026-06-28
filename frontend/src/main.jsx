@@ -57,6 +57,6 @@ createRoot(document.getElementById("root")).render(
         {/* أي رابط غير موجود */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 );
