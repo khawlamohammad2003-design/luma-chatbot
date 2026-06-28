@@ -260,14 +260,23 @@ def save_lead(text, db: Session):
             follow_up_date="",
         )
 
-        db.add(lead)
-        db.commit()
-        db.refresh(lead)
+        try:
+            db.add(lead)
+            db.commit()
+            db.refresh(lead)
+
+            import asyncio
+            asyncio.create_task(notify_clients())
+
+        except Exception as e:
+            db.rollback()
+            print("Lead save failed:", e)
+        
+        
 
 @app.post("/chat")
 async def chat(request: ChatRequest, db: Session = Depends(get_db)):
     save_lead(request.message, db)
-    await notify_clients()
 
     chat_history = []
 
