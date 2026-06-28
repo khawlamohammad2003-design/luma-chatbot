@@ -75,10 +75,14 @@ function App() {
             </h1>
             <p>Smart Sales Assistant</p>
           </div>
-
-          <a href="/#/leads" className="dashboard-btn">
+        {/*
+<a
+  href="/#/leads"
+  className="dashboard-btn"
+>
   Dashboard
 </a>
+*/}
         </div>
 
         <div className="assistant-card">
