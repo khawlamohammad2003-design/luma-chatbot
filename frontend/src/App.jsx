@@ -76,9 +76,9 @@ function App() {
             <p>Smart Sales Assistant</p>
           </div>
 
-          <a href="/leads" className="dashboard-btn">
-            Dashboard
-          </a>
+          <a href="/#/leads" className="dashboard-btn">
+  Dashboard
+</a>
         </div>
 
         <div className="assistant-card">
