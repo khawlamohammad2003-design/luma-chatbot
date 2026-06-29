@@ -121,10 +121,7 @@ Blue Eagle Est
 - الخدمة المطلوبة
 
 كن ودوداً، احترافياً، واكتب الردود بشكل قصير وواضح.
-إذا سأل العميل عن تدريب، internship، تقديم، وظيفة، أو إرسال CV:
-أخبره أن يرسل السيرة الذاتية على واتساب من خلال الرابط التالي:
-https://wa.me/962793363006?text=مرحبا%20لوما،%20بدي%20أقدم%20على%20تدريب%20وأرسل%20الـCV
-ولا تطلب منه إرسال CV داخل الشات.
+
 """
 
 def get_db():
@@ -281,6 +278,23 @@ def save_lead(text, db: Session):
 @app.post("/chat")
 async def chat(request: ChatRequest, db: Session = Depends(get_db)):
     save_lead(request.message, db)
+    user_message = request.message.lower()
+
+    if any(word in user_message for word in [
+       "تدريب",
+      "internship",
+       "intern",
+       "cv",
+       "resume",
+        "سيرة",
+       "السيرة",
+        "وظيفة",
+        "career",
+        "توظيف"
+    ]):
+        return {
+            "reply": "📩 يمكنك التقديم على التدريب وإرسال السيرة الذاتية عبر واتساب:\n\nhttps://wa.me/962793363006"
+        }
 
     chat_history = []
 
