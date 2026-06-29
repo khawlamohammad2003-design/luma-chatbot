@@ -127,7 +127,15 @@ function App() {
               )}
 
               <div className={msg.sender === "user" ? "message user" : "message bot"}>
-                {msg.text}
+                {msg.text.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
+  part.startsWith("http") ? (
+    <a key={i} href={part} target="_blank" rel="noopener noreferrer">
+      {part}
+    </a>
+  ) : (
+    part
+  )
+)}
               </div>
             </div>
           ))}
