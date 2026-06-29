@@ -34,10 +34,11 @@ app = FastAPI(title="Luma Chatbot API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://luma-chatbot-zgcx.vercel.app",
-        "https://luma-chatbot-green.vercel.app",
-        "http://localhost:5173",
-    ],
+    "https://luma-chatbot-zgcx.vercel.app",
+    "https://luma-chatbot-green.vercel.app",
+    "https://chat.luma-jo.com",
+    "http://localhost:5173",
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
