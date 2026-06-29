@@ -293,8 +293,9 @@ async def chat(request: ChatRequest, db: Session = Depends(get_db)):
         "توظيف"
     ]):
         return {
-            "reply": "📩 يمكنك التقديم على التدريب وإرسال السيرة الذاتية عبر واتساب:\n\nhttps://wa.me/962793363006"
-        }
+    "reply": "📩 يمكنك التقديم على التدريب وإرسال السيرة الذاتية.",
+    "whatsapp": "https://wa.me/962793363006"
+     }
 
     chat_history = []
 

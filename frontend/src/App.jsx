@@ -45,9 +45,13 @@ function App() {
       const data = await response.json();
 
       setMessages((prev) => [
-        ...prev,
-        { text: data.reply, sender: "bot" },
-      ]);
+  ...prev,
+  {
+    text: data.reply,
+    sender: "bot",
+    whatsapp: data.whatsapp,
+  },
+]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -127,35 +131,26 @@ function App() {
               )}
 
               <div className={msg.sender === "user" ? "message user" : "message bot"}>
-                {msg.text.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
-  part.startsWith("http") ? (
-    <a key={i} href={part} target="_blank" rel="noopener noreferrer">
-      {part}
+  <p
+    dangerouslySetInnerHTML={{
+      __html: msg.text.replace(
+        /(https?:\/\/[^\s]+)/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+      ),
+    }}
+  />
+
+  {msg.whatsapp && (
+    <a
+      href={msg.whatsapp}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="whatsapp-btn"
+    >
+      📲 التقديم عبر واتساب
     </a>
-  ) : (
-    part
-  )
-)}
-              </div>
-            </div>
-          ))}
-
-          {loading && (
-            <div className="message-row bot-row">
-              <div className="avatar logo-avatar">
-                <img src={lumaLogo} alt="Luma" />
-              </div>
-
-              <div className="message bot typing">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          )}
-
-          <div ref={chatEndRef}></div>
-        </div>
+  )}
+</div>
 
         <div className="input-area">
           <button className="attach-btn" type="button">📎</button>
