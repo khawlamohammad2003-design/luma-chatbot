@@ -90,18 +90,8 @@ setMessages((prev) => [
 ]);
 
     setLoading(false);
-    return;
-  }
-}
-
-      setMessages((prev) => [
-  ...prev,
-  {
-    text: data.reply,
-    sender: "bot",
-    whatsapp: data.whatsapp,
-  },
-]);
+   
+  
     } catch (error) {
       setMessages((prev) => [
         ...prev,
