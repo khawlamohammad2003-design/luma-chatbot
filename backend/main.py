@@ -279,6 +279,26 @@ def save_lead(text, db: Session):
 async def chat(request: ChatRequest, db: Session = Depends(get_db)):
     save_lead(request.message, db)
     user_message = request.message.lower()
+    bad_words = [
+    "غبي",
+    "حقير",
+    "تافه",
+    "كلب",
+    "حمار",
+    "اهبل",
+    "سخيف",
+    "زفت",
+    "لعنة",
+    "fuck",
+    "shit",
+    "stupid",
+    "idiot",
+]
+
+if any(word in user_message for word in bad_words):
+    return {
+        "reply": "نعتذر، لا يمكنني الاستمرار في المحادثة عند استخدام ألفاظ غير لائقة. يرجى التواصل باحترام حتى أتمكن من مساعدتك."
+    }
 
     if any(word in user_message for word in [
        "تدريب",

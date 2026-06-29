@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import lumaLogo from "./assets/logo.png";
-
+import { useState, useEffect, useRef } from "react";
 function App() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [warningCount, setWarningCount] = useState(0);
+  const [blocked, setBlocked] = useState(false);
   const chatEndRef = useRef(null);
 
   const [messages, setMessages] = useState([
@@ -20,6 +22,16 @@ function App() {
 
   const sendMessage = async (customMessage) => {
     const textToSend = customMessage || message;
+    if (blocked) {
+  setMessages((prev) => [
+    ...prev,
+    {
+      sender: "bot",
+      text: "🚫 تم إيقاف هذه المحادثة بسبب تكرار استخدام ألفاظ غير لائقة.",
+    },
+  ]);
+  return;
+}
     if (!textToSend.trim()) return;
 
     setMessages((prev) => [
@@ -43,6 +55,44 @@ function App() {
       });
 
       const data = await response.json();
+
+const rudeReply =
+  data.reply &&
+  data.reply.includes("لا يمكنني الاستمرار في المحادثة");
+
+if (rudeReply) {
+  const newCount = warningCount + 1;
+  setWarningCount(newCount);
+
+  if (newCount >= 2) {
+    setBlocked(true);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "bot",
+        text: "🚫 تم إيقاف المحادثة بسبب تكرار استخدام ألفاظ غير لائقة.",
+      },
+    ]);
+
+    setLoading(false);
+    return;
+  }
+}
+
+setMessages((prev) => [
+  ...prev,
+  {
+    text: data.reply,
+    sender: "bot",
+    whatsapp: data.whatsapp,
+  },
+]);
+
+    setLoading(false);
+    return;
+  }
+}
 
       setMessages((prev) => [
   ...prev,
